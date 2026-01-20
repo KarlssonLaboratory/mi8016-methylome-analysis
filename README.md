@@ -1,6 +1,6 @@
 # Research Trends in Toxicology
 
-This repo holds files for the **Methylome Analysis** lecture for the _Research Trends in Toxicology course_
+This repo holds the files for the **Methylome Analysis** lecture in the _Research Trends in Toxicology course_
 
 # Agenda
 
