@@ -32,8 +32,8 @@ Identify:
 
 For this we need to complete these steps:
 
-1. [Map CpG-sites](#map-cpg-sites)
-2. Ensembl dataset, `ensembl_dataset.csv.gz`.
+1. [Map CpG-sites](#1-map-cpg-sites)
+2. [Extract Ensembl dataset](#2-extract-ensembl-dataset)
 3. Calculate differentially methylated regions (CpG-sites).
 4. Overlap with genomics regions (promoter, exon, CpG-islands) to find differentially methylated genes.
 5. Calculate gene ontology enrichment scores w/ over-representation analysis.
@@ -87,9 +87,15 @@ The script requires the following R-packages: `BSgenome.Hsapiens.UCSC.hg38` and 
 Will generate `data/cpg_positions.txt.gz`.
 
 
-## 2. Ensembl dataset
+## 2. Extract Ensembl dataset
 
-Will generate `data/ensembl_dataset.csv.gz`.
+[Ensembl](https://ensembl.org/) is a public project providing access to reference genomes and gene annotations. We will be extracting all the known coding and non-coding genes gene positions.
+
+```sh
+Rscript bin/ensembl.R
+```
+
+Will generate `data/ensembl_table.csv.gz`.
 
 ## 3. Calculate differentially methylated regions
 
