@@ -4,14 +4,14 @@ This repo holds the files for the **Methylome Analysis** lecture in the _Researc
 
 # Agenda
 
-+ Reproduce figure 1 and 2 from the [PFOS EM-seq paper](https://doi.org/10.1016/j.scitotenv.2024.174864).
++ Reproduce figure 1 and 3 from the [PFOS EM-seq paper](https://doi.org/10.1016/j.scitotenv.2024.174864).
   + Show the process from FASTQ-files => coverage-files => table (csv)
     + Make slide to follow-along for this
-  + Use the table to generate figure 1 and 2
+  + Use the table to generate figure 1 and 3
     + Make slide to follow-along for this
   + Write stand along code to reproduce the figures
-  
 
+---
 
 # Computational analysis
 
@@ -32,14 +32,14 @@ Identify:
 
 For this we need to complete these steps:
 
-1. Map CpG-sites, `cpg_positions.txt.gz`.
+1. [Map CpG-sites](#map-cpg-sites)
 2. Ensembl dataset, `ensembl_dataset.csv.gz`.
 3. Calculate differentially methylated regions (CpG-sites).
 4. Overlap with genomics regions (promoter, exon, CpG-islands) to find differentially methylated genes.
 5. Calculate gene ontology enrichment scores w/ over-representation analysis.
 6. Generate a figure for the enriched gene ontology terms.
 
-## 1. CpG-sites on the genome
+## 1. Map CpG-sites
 
 Extract the exact positions of `CG`-motifs in the human genome, save as text file `data/cpg_positions.txt.gz`. This table will be used to filter out only the CpG-sites for downstream analysis. To generate the file run this in the terminal (or run the script inside Positron / Rstudio):
 
@@ -50,7 +50,7 @@ Rscript bin/cpg_positions.R
 The script requires the following R-packages: `BSgenome.Hsapiens.UCSC.hg38` and `readr`.
 
 <details>
-  <summary>How to install R-packages</summary>
+  <summary>How to install R-packages</summary><br>
 
   > Assuming you have R already installed
   
@@ -71,7 +71,7 @@ The script requires the following R-packages: `BSgenome.Hsapiens.UCSC.hg38` and 
 </details>
 
 <details>
-  <summary>Run code with containers</summary>
+  <summary>Run code with containers</summary><br>
 
   Use a singularity container with a pre-install environment (OS, R, packages). Run with apptainer / singularity
 
