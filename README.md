@@ -112,10 +112,10 @@ Will generate `data/diffmeth.csv.gz`.
 
 Find out which genomic regions (promoter, exon, intron, intergenic, CpG-islands) overlap with the DMRs.
 
-> [!NOTE] We'll need two tables that hold the information for CpG-islands position and genome annotations, both of which can be downloaded from University of [California Santa Cruz (UCSC) Genomics Institute](https://genome-euro.ucsc.edu/index.html).
+> [!NOTE] We'll need two tables that hold the information for CpG-islands position and genome annotations, both of which can be downloaded from University of [California Santa Cruz (UCSC) Genomics Institute](https://genome-euro.ucsc.edu/index.html). These files are included in the repo, inside `data/`.
 
 <details>
-  <summary></summary><br>
+  <summary>Download genome annotations</summary><br>
 
   Annotations can be exported from the [Table Browser tool](https://genome-euro.ucsc.edu/cgi-bin/hgTables) at UCSC database. To download the annotations set the parameters as follow:
 
@@ -155,6 +155,8 @@ Find out which genomic regions (promoter, exon, intron, intergenic, CpG-islands)
 ```sh
 Rscript bin/methtable.R
 ```
+
+Will generate `data/PFOS_MCF10A_DMR.csv.gz`
 
 ---
 
