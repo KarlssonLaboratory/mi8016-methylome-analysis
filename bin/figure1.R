@@ -226,7 +226,7 @@ p <- plot_grid(
   align = "h"
 )
 
-filename <- "figure1.pdf"
+filename <- "figure1.png"
 
 if (!exists("images")) dir.create("images")
 

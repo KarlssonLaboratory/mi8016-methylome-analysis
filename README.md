@@ -194,6 +194,8 @@ Generate figure 1 from [PFOS MCF10A EMseq](https://doi.org/10.1016/j.scitotenv.2
 Rscript bin/figure1.R
 ```
 
+![Figure 1](images/figure1.png)
+
 ## 7. Generate figure 3
 
 ```sh
