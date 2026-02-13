@@ -1,15 +1,13 @@
 # Research Trends in Toxicology
 
-This repo holds the files for the **Methylome Analysis** lecture in the _Research Trends in Toxicology course_
+This repo holds the code needed for **Methylome Analysis** lecture in the [_Research Trends in Toxicology course_](https://www.su.se/english/education/course-catalogue/mi/mi8016). The lecture generates figure 1 and 3 from the [PFOS MCF10A EMseq](https://doi.org/10.1016/j.scitotenv.2024.174864) paper.
 
 # Agenda
 
 + Reproduce figure 1 and 3 from the [PFOS EM-seq paper](https://doi.org/10.1016/j.scitotenv.2024.174864).
-  + Show the process from FASTQ-files => coverage-files => table (csv)
-    + Make slide to follow-along for this
-  + Use the table to generate figure 1 and 3
-    + Make slide to follow-along for this
-  + Write stand along code to reproduce the figures
++ Share code for the process coverage files => DMR table (csv)
++ Make slide showing the workflow of the methylome analysis
++ Write stand along code to reproduce the figures
 
 ---
 
@@ -17,26 +15,19 @@ This repo holds the files for the **Methylome Analysis** lecture in the _Researc
 
 ## Alignment & coverage
 
-+ alignment to the reference genome
-+ calculation of the coverage of the CpG-sites
-
-Output: coverage files (`*.cov.gz`)
+This process is beyond the scope of this lecture. In short, the [nfcore/methylseq:1.6.1](https://nf-co.re/methylseq/1.6.1) was used to align the reads to the reference genome and generate the coverage (`*.cov.gz`).
 
 ## Differential methylation analysis
 
-Identify:
+We want to identify the **D**ifferentially **M**ethylated **R**egions (DMRs) focusing on CpG-sites - but we still call them regions. These DMRs are overlapped with annotated gene positions to identify **D**ifferentially **M**ethylated **G**enes (DMGs), with genes being considored if a DMR is found inside the promoter or the exon, as these genomic regions when influced by DNA methylation affect the transcription machinery. DMR inside introns are not considored. Lastly, the identified DMGs are tested for gene pathway enrichment to understand which gene pathways are affected by PFOS exposure.
 
-+ **D**ifferentially **M**ethylated **R**egions (DMRs)
-+ **D**ifferentially **M**ethylated **G**enes (DMGs), DMRs are overlay with genomic positions and any overlapping genes is concidored a DMG.
-+ Enriched gene ontology terms
-
-For this we need to complete these steps:
+For this we need to complete the follow steps:
 
 1. [Map CpG-sites](#1-map-cpg-sites)
 2. [Extract Ensembl dataset](#2-extract-ensembl-dataset)
 3. [Differentially methylated regions](#3-differentially-methylated-regions)
 4. [Overlap DMRs with genomics regions](#4-overlap-dmrs-with-genomics-regions)
-5. Calculate gene ontology enrichment scores w/ over-representation analysis.
+5. [Calculate pathway enrichment scores](#5-calculate-pathway-enrichment-score)
 6. Generate a figure for the enriched gene ontology terms.
 
 ## 1. Map CpG-sites
@@ -112,7 +103,8 @@ Will generate `data/diffmeth.csv.gz`.
 
 Find out which genomic regions (promoter, exon, intron, intergenic, CpG-islands) overlap with the DMRs.
 
-> [!NOTE] We'll need two tables that hold the information for CpG-islands position and genome annotations, both of which can be downloaded from University of [California Santa Cruz (UCSC) Genomics Institute](https://genome-euro.ucsc.edu/index.html). These files are included in the repo, inside `data/`.
+> [!NOTE] 
+> We'll need two tables that hold the information for CpG-islands position and genome annotations, both of which can be downloaded from University of [California Santa Cruz (UCSC) Genomics Institute](https://genome-euro.ucsc.edu/index.html). These files are included in the repo, inside `data/`.
 
 <details>
   <summary>Download genome annotations</summary><br>
@@ -166,21 +158,24 @@ Rscript bin/genetable.R
 
 Will generate `data/PFOS_MCF10A_DMG.csv.gz`
 
----
+## 5. Calculate pathway enrichment scores
 
-Make a table containing all the differentially methylated CpG-sites.
+Use the R-packages [`clusterProfiler`](https://bioconductor.org/packages//release/bioc/html/clusterProfiler.html) and [`org.Hs.eg.db`](https://www.bioconductor.org/packages/release/data/annotation/html/org.Hs.eg.db.html) to calculate pathway enrichment scores.
 
-Run: `bin/diffmeth.R` (`sbatch diffmeth.slurm`), generates `table.csv`
+<!-- 
+
+This section needs fixing!
+
+data/PFOS_MCF10A_GO.Rds is copied from the original project. For some reason
+I could not run the script inside the container, perhaps org.Hs.eg.db is the
+problem
+
+-->
 
 ```sh
-# Testing in interaction session, 500Gb and 10 cpus needed
-# salloc is custom script
-salloc 5:00:00 500 10
-
-#METH_SIF='library://andreyhgl/singularity-r/methylome'
-apptainer shell $METH_SIF
+Rscript bin/gene_ontology.R
 ```
 
----
+Will generate `data/PFOS_MCF10A_GO.Rds`
 
-## 5.
+---
