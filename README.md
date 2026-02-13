@@ -208,6 +208,28 @@ Rscript bin/figure1.R
 
 ## 7. Generate figure 3
 
+Generate figure 3 from [PFOS MCF10A EMseq](https://doi.org/10.1016/j.scitotenv.2024.174864) paper. The figure shows pathway enrichment results with GO terms matching the following keywords:
+
++ motor
++ actin
++ adhesion
++ growth
++ collagen
++ myosin
++ microtubule
++ cytoskeletal
++ junction
++ extracellular
++ locomotion
+
+These keywords are matched against the gene description and are relevant genes for PFOS induced phenotypes (previously demonstrated [Pierozan and Karlsson, 2018](https://doi.org/10.1007/s00204-017-2077-8)).
+
 ```sh
 Rscript bin/figure3.R
 ```
+
+<details>
+  <summary>Figure 3</summary><br>
+
+  ![Figure 3](images/figure3.png)
+</details>
