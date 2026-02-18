@@ -2,12 +2,26 @@
 
 This repo holds the code needed for **Methylome Analysis** lecture in the [_Research Trends in Toxicology course_](https://www.su.se/english/education/course-catalogue/mi/mi8016). The lecture generates figure 1 and 3 from the [PFOS MCF10A EMseq](https://doi.org/10.1016/j.scitotenv.2024.174864) paper.
 
-# Agenda
+## File structure
 
-+ Reproduce figure 1 and 3 from the [PFOS EM-seq paper](https://doi.org/10.1016/j.scitotenv.2024.174864).
-+ Share code for the process coverage files => DMR table (csv)
-+ Make slide showing the workflow of the methylome analysis
-+ Write stand along code to reproduce the figures
+```
+project/
+├── bin/
+│   ├── cpg_positions.R
+│   ├── diffmeth.R
+│   ├── ensembl.R
+│   ├── figure1.R
+│   ├── figure3.R
+│   ├── gene_ontology.R
+│   ├── genetable.R
+│   └── methtable.R
+└── data/
+    ├── PFOS_MCF-10A_DMG.Rds
+    ├── PFOS_MCF-10A_DMR.Rds
+    ├── PFOS_MCF-10A_GO.Rds
+    ├── cpgislands_GRCh38.bed
+    └── refseq_UCSC_GRCh38.bed
+```
 
 ---
 

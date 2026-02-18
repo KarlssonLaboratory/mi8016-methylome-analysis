@@ -230,11 +230,11 @@ p <- plot_grid(
   align = "h"
 )
 
-filename <- "figure1.png"
+filename <- "emseq_pfos_figure1.png"
 
 ggsave(
   filename = filename,
-  path = "images",
+  path = "docs/images",
   plot = p,
   width = 9,
   height = 9,
