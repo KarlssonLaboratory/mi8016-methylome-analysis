@@ -2,30 +2,16 @@
   {
     "objectID": "docs/t_test.html",
     "href": "docs/t_test.html",
-    "title": "Methylome Analysis (mi8016)",
+    "title": "Research Approaches II: Data Analysis (mi8016)",
     "section": "",
     "text": "https://doi.org/10.1007/s00204-017-2077-8 figure 3 A and B"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Methylome Analysis (mi8016)",
+    "title": "Research Approaches II: Data Analysis (mi8016)",
     "section": "",
-    "text": "Welcome to my site!"
-  },
-  {
-    "objectID": "index.html#about",
-    "href": "index.html#about",
-    "title": "Methylome Analysis (mi8016)",
-    "section": "About",
-    "text": "About\nSome intro text here."
-  },
-  {
-    "objectID": "index.html#latest",
-    "href": "index.html#latest",
-    "title": "Methylome Analysis (mi8016)",
-    "section": "Latest",
-    "text": "Latest\n\nR Introduction\nMethylome Analysis"
+    "text": "Welcome to the lecture webpage for Research Approaches II: Data Analysis (course: Research Trends in Toxicology (mi8016)). This lecture reproduces the figures from two toxicology papers about PFOS paper 1, paper 2\n\nR Introduction\nT-test\nANOVA\nMethylome Analysis"
   },
   {
     "objectID": "docs/methylome_analysis.html",
