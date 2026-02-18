@@ -1,26 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Methylome Analysis (mi8016)",
-    "section": "",
-    "text": "Welcome to my site!"
-  },
-  {
-    "objectID": "index.html#about",
-    "href": "index.html#about",
-    "title": "Methylome Analysis (mi8016)",
-    "section": "About",
-    "text": "About\nSome intro text here."
-  },
-  {
-    "objectID": "index.html#latest",
-    "href": "index.html#latest",
-    "title": "Methylome Analysis (mi8016)",
-    "section": "Latest",
-    "text": "Latest\n\nR Introduction\nMethylome Analysis"
-  },
-  {
     "objectID": "docs/R_installation_tutorial.html",
     "href": "docs/R_installation_tutorial.html",
     "title": "The R Project for Statistical Computing",
@@ -54,5 +33,96 @@
     "title": "The R Project for Statistical Computing",
     "section": "Positron",
     "text": "Positron\nPositron can be dowloaded here\nPositron might be a good fit for you if you\n\nuse VS Code for data science (Python or R) but wish it included more interactive affordances for data-specific tasks like running exploratory code, examining your variables and datasets, interacting with your plots, and developing data apps such as Shiny, Streamlit, or FastAPI.\nuse JupyterLab or hosted notebook tools for data science (Python or R) and are ready for a more powerful, fully-featured IDE that still supports notebooks.\nuse RStudio and want more ability to customize or extend your IDE.\nuse additional languages beyond only Python or R in your day-to-day data science or package development work, like Rust, C++, JavaScript, or Lua.\nwant access to powerful, data-science specific AI integrations in a modern, extensible IDE.\n\nPositron’s user interface (UI) should feel familiar to RStudio users, but there are also changes to get used to. First, let’s take a high-level, side-by-side view of the two IDEs. This figure highlights the role each area plays in your workflow and draws similarities between Positron and RStudio. You write code in an editor, run your code in the Console, and view outputs like plots, variables, and reports in dedicated panes or tabs.\n\n\n\nComparison of RStudio and Positron user interfaces\n\n\nHowever, there are few differences.\n\n\n\nInterface of the Positron IDE\n\n\nTwo specific UI elements are the most novel for RStudio users:\n\nThe Activity Bar provides access to different functional capabilities of Positron. Clicking here switches what appears in the Primary Side Bar.\nThe Primary Side Bar displays context-specific content based on which icon is clicked in the Activity Bar."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Methylome Analysis (mi8016)",
+    "section": "",
+    "text": "Welcome to my site!"
+  },
+  {
+    "objectID": "index.html#about",
+    "href": "index.html#about",
+    "title": "Methylome Analysis (mi8016)",
+    "section": "About",
+    "text": "About\nSome intro text here."
+  },
+  {
+    "objectID": "index.html#latest",
+    "href": "index.html#latest",
+    "title": "Methylome Analysis (mi8016)",
+    "section": "Latest",
+    "text": "Latest\n\nR Introduction\nMethylome Analysis"
+  },
+  {
+    "objectID": "docs/methylome_analysis.html",
+    "href": "docs/methylome_analysis.html",
+    "title": "Research Trends in Toxicology",
+    "section": "",
+    "text": "This repo holds the code needed for Methylome Analysis lecture in the Research Trends in Toxicology course. The lecture generates figure 1 and 3 from the PFOS MCF10A EMseq paper."
+  },
+  {
+    "objectID": "docs/methylome_analysis.html#alignment-coverage",
+    "href": "docs/methylome_analysis.html#alignment-coverage",
+    "title": "Research Trends in Toxicology",
+    "section": "🧬 Alignment & coverage",
+    "text": "🧬 Alignment & coverage\n\n[!NOTE] This process is beyond the scope of this lecture. In short, the nfcore/methylseq:1.6.1 was used to align the reads to the reference genome and generate the coverage files (*.cov.gz)."
+  },
+  {
+    "objectID": "docs/methylome_analysis.html#differential-methylation-analysis",
+    "href": "docs/methylome_analysis.html#differential-methylation-analysis",
+    "title": "Research Trends in Toxicology",
+    "section": "Differential methylation analysis",
+    "text": "Differential methylation analysis\nWe want to identify the Differentially Methylated Regions (DMRs) focusing on CpG-sites - but we still call them regions. These DMRs are overlapped with annotated gene positions to identify Differentially Methylated Genes (DMGs), with genes being considored if a DMR is found inside the promoter or the exon, as these genomic regions when influced by DNA methylation affect the transcription machinery. DMR inside introns are not considored. Lastly, the identified DMGs are tested for gene pathway enrichment to understand which gene pathways are affected by PFOS exposure.\nFor this we need to complete the follow steps:\n\nMap CpG-sites\nExtract Ensembl dataset\nDifferentially methylated regions\nOverlap DMRs with genomics regions\nCalculate pathway enrichment scores\nGenerate figure 1\nGenerate figure 3"
+  },
+  {
+    "objectID": "docs/methylome_analysis.html#map-cpg-sites",
+    "href": "docs/methylome_analysis.html#map-cpg-sites",
+    "title": "Research Trends in Toxicology",
+    "section": "1. Map CpG-sites",
+    "text": "1. Map CpG-sites\nExtract the exact positions of CG-motifs in the human genome, save as text file data/cpg_positions.txt.gz. This table will be used to filter out only the CpG-sites for downstream analysis. To generate the file run this in the terminal (or run the script inside Positron / Rstudio):\nRscript bin/cpg_positions.R\nThe script requires the following R-packages: BSgenome.Hsapiens.UCSC.hg38 and readr.\n\n\nHow to install R-packages\n\n\n\nAssuming you have R already installed\n\nBasic R-packages are installed from CRAN (install.packages()) while bioinformatic R-packages are installed from Bioconductor (BiocManager::install()). In order, to install from Bioconductor we need first to install the Bioconductor Manager, see code below:\n  # Install Bioconductor manager\n  install.packages(\"BiocManager\")\n  \n  # Install from CRAN\n  install.packages(\"readr\")\n  \n  # Install from Bioconductor\n  BiocManager::install(\"BSgenome.Hsapiens.UCSC.hg38\")\nInstall packages like this will download the latest version. Exact version numbers are important for reproducibility.\n\n\n\nRun code with containers\n\n\nUse a singularity container with a pre-install environment (OS, R, packages). Run with apptainer / singularity\n  # Save container as a variable\n  METH_SIF='library://andreyhgl/singularity-r/methylome'\n\n  # Run the container\n  apptainer exec $METH_SIF Rscript bin/cpg_positions.R\n\nWill generate data/cpg_positions.txt.gz."
+  },
+  {
+    "objectID": "docs/methylome_analysis.html#extract-ensembl-dataset",
+    "href": "docs/methylome_analysis.html#extract-ensembl-dataset",
+    "title": "Research Trends in Toxicology",
+    "section": "2. Extract Ensembl dataset",
+    "text": "2. Extract Ensembl dataset\nEnsembl is a public project providing access to reference genomes and gene annotations. We will be extracting all the known coding and non-coding genes gene positions.\nRscript bin/ensembl.R\nWill generate data/ensembl_table.csv.gz."
+  },
+  {
+    "objectID": "docs/methylome_analysis.html#differentially-methylated-regions",
+    "href": "docs/methylome_analysis.html#differentially-methylated-regions",
+    "title": "Research Trends in Toxicology",
+    "section": "3. Differentially methylated regions",
+    "text": "3. Differentially methylated regions\nCalulate Differentially Methylated Regions (DMRs) focusing on CpG-sites - but we still call them regions.\nThis script is computationally heavy: requires 500Gb ram, 10 cpus and runs for 1,5h. Hence, it’s best ran on a computer cluster, like UPPMAX.\nRscript bin/diffmeth.R\nWill generate data/diffmeth.csv.gz."
+  },
+  {
+    "objectID": "docs/methylome_analysis.html#overlap-dmrs-with-genomics-regions",
+    "href": "docs/methylome_analysis.html#overlap-dmrs-with-genomics-regions",
+    "title": "Research Trends in Toxicology",
+    "section": "4. Overlap DMRs with genomics regions",
+    "text": "4. Overlap DMRs with genomics regions\nFind out which genomic regions (promoter, exon, intron, intergenic, CpG-islands) overlap with the DMRs.\n\n[!NOTE] We’ll need two tables that hold the information for CpG-islands position and genome annotations, both of which can be downloaded from University of California Santa Cruz (UCSC) Genomics Institute. These files are included in the repo, inside data/.\n\n\n\nDownload genome annotations\n\n\nAnnotations can be exported from the Table Browser tool at UCSC database. To download the annotations set the parameters as follow:\n\nCpG-islands annotations, save as cpgislands_GRCh38.bed\nclade = \"Mammals\" \ngenome = \"Human\"\nassembly = \"Dec. 2013 (GRCh38/hg38)\"\ngroup = \"Regulation\"\ntrack = \"CpG-islands\"\ntable = \"cpgIslandExt\"\noutput format = \"BED\"\noutput filename = \"cpgislands_GRCh38.bed\"\n\n&lt;click&gt; \"get output\" \n&lt;click&gt; \"get BED\"\n\nRefseq annotations, save as refseq_UCSC_GRCh38.bed\n\nclade = \"Mammals\" \ngenome = \"Human\"\nassembly = \"Dec. 2013 (GRCh38/hg38)\"\ngroup = \"Genes and Gene Predictions\"\ntrack = \"NCBI RefSeq\"\ntable = \"UCSC RefSeq (refGene)\"\noutput format = \"BED\"\noutput filename = \"refseq_UCSC_GRCh38.bed\"\n\n&lt;click&gt; \"get output\" \n&lt;click&gt; \"get BED\"\n\n\nRscript bin/methtable.R\nWill generate data/PFOS_MCF-10A_DMR.Rds\nAdditionally, a table from the gene perspective (each row is a gene), is useful from an explanatory approach.\nRscript bin/genetable.R\nWill generate data/PFOS_MCF-10A_DMG.Rds"
+  },
+  {
+    "objectID": "docs/methylome_analysis.html#calculate-pathway-enrichment-scores",
+    "href": "docs/methylome_analysis.html#calculate-pathway-enrichment-scores",
+    "title": "Research Trends in Toxicology",
+    "section": "5. Calculate pathway enrichment scores",
+    "text": "5. Calculate pathway enrichment scores\nUse the R-packages clusterProfiler and org.Hs.eg.db to calculate pathway enrichment scores.\n\nRscript bin/gene_ontology.R\nWill generate data/PFOS_MCF-10A_GO.Rds"
+  },
+  {
+    "objectID": "docs/methylome_analysis.html#generate-figure-1",
+    "href": "docs/methylome_analysis.html#generate-figure-1",
+    "title": "Research Trends in Toxicology",
+    "section": "6. Generate figure 1",
+    "text": "6. Generate figure 1\nGenerate figure 1 from PFOS MCF10A EMseq paper. The figure is composed of five plots:\n\nMethylation status of DMRs\nGenomic regions of DMRs\nDM CpG-islands\nGenes overlapping DMRs\nGene types of DMRs overlapping with promoter, exon and/or CGI\n\nRscript bin/figure1.R\n\n\nFigure 1\n\n\n\n\n\nFigure 1"
+  },
+  {
+    "objectID": "docs/methylome_analysis.html#generate-figure-3",
+    "href": "docs/methylome_analysis.html#generate-figure-3",
+    "title": "Research Trends in Toxicology",
+    "section": "7. Generate figure 3",
+    "text": "7. Generate figure 3\nGenerate figure 3 from PFOS MCF10A EMseq paper. The figure shows pathway enrichment results with GO terms matching the following keywords:\n\nmotor\nactin\nadhesion\ngrowth\ncollagen\nmyosin\nmicrotubule\ncytoskeletal\njunction\nextracellular\nlocomotion\n\nThese keywords are matched against the gene description and are relevant genes for PFOS induced phenotypes (previously demonstrated Pierozan and Karlsson, 2018).\nRscript bin/figure3.R\n\n\nFigure 3\n\n\n\n\n\nFigure 3"
   }
 ]
