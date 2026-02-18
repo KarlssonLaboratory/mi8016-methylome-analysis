@@ -3,7 +3,7 @@ project:
   output-dir: _site
 
 website:
-  title: "Methylome Analysis (mi8016)"
+  title: "Research Approaches II: Data Analysis (mi8016)"
   navbar:
     left:
       - href: index.qmd
@@ -16,7 +16,14 @@ website:
         text: T-test
       - href: docs/anova.qmd
         text: ANOVA  
+    right:
+      - icon: github
+        href: https://github.com/karlssonlaboratory/mi8016-Research-Approaches
+        text: GitHub
+      - icon: link
+        href: https://karlssonlab.se/
+        text: Karlssonlab
 
 format:
   html:
-    theme: cosmo
+    theme: materia
