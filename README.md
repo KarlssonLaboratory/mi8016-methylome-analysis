@@ -1,3 +1,5 @@
+![Deploy](https://github.com/KarlssonLaboratory/mi8016-Research-Approaches/actions/workflows/deploy.yml/badge.svg)
+
 # Research Trends in Toxicology
 
 This repo holds the code needed for **Methylome Analysis** lecture in the [_Research Trends in Toxicology course_](https://www.su.se/english/education/course-catalogue/mi/mi8016). The lecture generates figure 1 and 3 from the [PFOS MCF10A EMseq](https://doi.org/10.1016/j.scitotenv.2024.174864) paper.

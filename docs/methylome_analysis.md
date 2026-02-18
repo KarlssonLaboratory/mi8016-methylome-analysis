@@ -15,8 +15,9 @@ This repo holds the code needed for **Methylome Analysis** lecture in the [_Rese
 
 ## 🧬 Alignment & coverage
 
-> [!NOTE]
-> This process is beyond the scope of this lecture. In short, the [nfcore/methylseq:1.6.1](https://nf-co.re/methylseq/1.6.1) was used to align the reads to the reference genome and generate the coverage files (`*.cov.gz`).
+::: {.callout-note}
+This process is beyond the scope of this lecture. In short, the [nfcore/methylseq:1.6.1](https://nf-co.re/methylseq/1.6.1) was used to align the reads to the reference genome and generate the coverage files (`*.cov.gz`).
+:::
 
 ## Differential methylation analysis
 
@@ -108,8 +109,9 @@ Will generate `data/diffmeth.csv.gz`.
 
 Find out which genomic regions (promoter, exon, intron, intergenic, CpG-islands) overlap with the DMRs.
 
-> [!NOTE] 
-> We'll need two tables that hold the information for CpG-islands position and genome annotations, both of which can be downloaded from University of [California Santa Cruz (UCSC) Genomics Institute](https://genome-euro.ucsc.edu/index.html). These files are included in the repo, inside `data/`.
+::: {.callout-note}
+We'll need two tables that hold the information for CpG-islands position and genome annotations, both of which can be downloaded from University of [California Santa Cruz (UCSC) Genomics Institute](https://genome-euro.ucsc.edu/index.html). These files are included in the repo, inside `data/`.
+:::
 
 <details>
   <summary>Download genome annotations</summary><br>
