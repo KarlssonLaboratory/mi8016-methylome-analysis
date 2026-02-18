@@ -35,27 +35,6 @@
     "text": "Positron\nPositron can be dowloaded here\nPositron might be a good fit for you if you\n\nuse VS Code for data science (Python or R) but wish it included more interactive affordances for data-specific tasks like running exploratory code, examining your variables and datasets, interacting with your plots, and developing data apps such as Shiny, Streamlit, or FastAPI.\nuse JupyterLab or hosted notebook tools for data science (Python or R) and are ready for a more powerful, fully-featured IDE that still supports notebooks.\nuse RStudio and want more ability to customize or extend your IDE.\nuse additional languages beyond only Python or R in your day-to-day data science or package development work, like Rust, C++, JavaScript, or Lua.\nwant access to powerful, data-science specific AI integrations in a modern, extensible IDE.\n\nPositron’s user interface (UI) should feel familiar to RStudio users, but there are also changes to get used to. First, let’s take a high-level, side-by-side view of the two IDEs. This figure highlights the role each area plays in your workflow and draws similarities between Positron and RStudio. You write code in an editor, run your code in the Console, and view outputs like plots, variables, and reports in dedicated panes or tabs.\n\n\n\nComparison of RStudio and Positron user interfaces\n\n\nHowever, there are few differences.\n\n\n\nInterface of the Positron IDE\n\n\nTwo specific UI elements are the most novel for RStudio users:\n\nThe Activity Bar provides access to different functional capabilities of Positron. Clicking here switches what appears in the Primary Side Bar.\nThe Primary Side Bar displays context-specific content based on which icon is clicked in the Activity Bar."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Methylome Analysis (mi8016)",
-    "section": "",
-    "text": "Welcome to my site!"
-  },
-  {
-    "objectID": "index.html#about",
-    "href": "index.html#about",
-    "title": "Methylome Analysis (mi8016)",
-    "section": "About",
-    "text": "About\nSome intro text here."
-  },
-  {
-    "objectID": "index.html#latest",
-    "href": "index.html#latest",
-    "title": "Methylome Analysis (mi8016)",
-    "section": "Latest",
-    "text": "Latest\n\nR Introduction\nMethylome Analysis"
-  },
-  {
     "objectID": "docs/methylome_analysis.html",
     "href": "docs/methylome_analysis.html",
     "title": "Research Trends in Toxicology",
@@ -124,5 +103,33 @@
     "title": "Research Trends in Toxicology",
     "section": "7. Generate figure 3",
     "text": "7. Generate figure 3\nGenerate figure 3 from PFOS MCF10A EMseq paper. The figure shows pathway enrichment results with GO terms matching the following keywords:\n\nmotor\nactin\nadhesion\ngrowth\ncollagen\nmyosin\nmicrotubule\ncytoskeletal\njunction\nextracellular\nlocomotion\n\nThese keywords are matched against the gene description and are relevant genes for PFOS induced phenotypes (previously demonstrated Pierozan and Karlsson, 2018).\nRscript bin/figure3.R\n\n\nFigure 3\n\n\n\n\n\nFigure 3"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Methylome Analysis (mi8016)",
+    "section": "",
+    "text": "Welcome to my site!"
+  },
+  {
+    "objectID": "index.html#about",
+    "href": "index.html#about",
+    "title": "Methylome Analysis (mi8016)",
+    "section": "About",
+    "text": "About\nSome intro text here."
+  },
+  {
+    "objectID": "index.html#latest",
+    "href": "index.html#latest",
+    "title": "Methylome Analysis (mi8016)",
+    "section": "Latest",
+    "text": "Latest\n\nR Introduction\nMethylome Analysis"
+  },
+  {
+    "objectID": "docs/t_test.html",
+    "href": "docs/t_test.html",
+    "title": "Methylome Analysis (mi8016)",
+    "section": "",
+    "text": "https://doi.org/10.1007/s00204-017-2077-8 figure 3 A and B"
   }
 ]
