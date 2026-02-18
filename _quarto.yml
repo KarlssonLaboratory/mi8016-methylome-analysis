@@ -26,4 +26,4 @@ website:
 
 format:
   html:
-    theme: materia
+    theme: simplex
