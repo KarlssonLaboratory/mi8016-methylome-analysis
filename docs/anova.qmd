@@ -123,10 +123,10 @@ Tukey–Kramer is essentially Tukey’s method generalized to unequal n’s, kee
 
 
 ```{r}
-control <- subset(a, variable == "Control")$value
-dose250um <- subset(a, variable == "250 uM")$value
+#control <- subset(a, variable == "Control")$value
+#dose250um <- subset(a, variable == "250 uM")$value
 
-t.test(control, dose250um)
+#t.test(control, dose250um)
 
 library(ggplot2)
 library(ggsignif)
