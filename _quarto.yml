@@ -27,7 +27,7 @@ format:
   html:
     code-annotations: below
     theme: pulse
-    highlight-style: github
+    highlight-style: tango
 
 execute:
   warning: false
