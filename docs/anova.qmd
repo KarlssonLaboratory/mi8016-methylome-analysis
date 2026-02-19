@@ -106,16 +106,18 @@ ggplot(dat, aes(x = variable, y = value, fill = variable)) +
 
 The legend is not needed, remove it with `theme(legend.position = "none")`:
 
-```{r code-line-numbers="4"}
+```{r}
 ggplot(dat, aes(x = variable, y = value, fill = variable)) +
   geom_bar(fun = "mean", stat = "summary", color = "black") +
   theme_classic(base_size = 18) +
-  theme(legend.position = "none") + # default: legend.position = "right"
+  theme(legend.position = "none") + # default: legend.position = "right" # <1>
   labs(
     title = "Proliferation",
     x = "",
     y = "DAPI Positive cells")
 ```
+
+1. legend.position is set to "none" and is not rendered.
 
 We need to add "whiskers" to the plot, which shows mean +/- standard deviation, i.e the variance. Use `geom_errorbar`: 
 
