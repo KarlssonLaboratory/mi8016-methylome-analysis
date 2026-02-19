@@ -1,3 +1,160 @@
+---
+title: "Analysis of Variance - ANOVA"
+subtitle: "Comparison of multiple group means"
+---
 
-ANOVA and Tukey Kramer posthoc test
-https://scibrief.blog/tukey-kramer-r
+In the [PFOS paper from 2018](https://doi.org/10.1007/s00204-017-2077-8), PFOS in different doses and exposure times was applied and correlated with phenotypes such as proliferation, invation and migration. Here, we will reproduce the statistics and the figures for [figure 1F](https://link.springer.com/article/10.1007/s00204-017-2077-8/figures/1) and [figure 3](https://link.springer.com/article/10.1007/s00204-017-2077-8/figures/3). 
+
+```{r}
+# Once per machine
+#install.packages("forcats")
+
+# Every R session
+library(forcats)
+```
+
+## Proliferation
+
+Figure 1F shows the proliferation phenotype over mulitple doses of PFOS. Proliferation is translated into how the cells are dividing by observing number of cell nuclei with a staining method called [DAPI](https://en.wikipedia.org/wiki/DAPI).
+
+Import the dataset, will be contained inside a "data frame", and inspect it with the `head()` and `summary()` functions:
+
+```{r}
+# Import dataset
+dat <- read.csv("data/proliferation.csv")
+
+# head shows the top 6 rows of a data frame
+head(dat)
+
+# summary shows ranges and types per column
+summary(dat)
+```
+
+::: {.callout-tip collapse=true title="What can you read about the dataset?"}
+The data frame is composed of 2 columns and 52 rows.
+:::
+
+Lets make a simple plot! 
+
+The `plot()` function can read a data frame and recognice that the variable column is categorical and the value column is numeric. With this a box-plot figure is built where `x = variable` and `y = value`:
+
+```{r}
+# Make variable column into factor (categorical)
+# forcats::fct_inorder makes the categorices of the column the order they appear
+dat$variable <- fct_inorder(dat$variable)
+
+# Plot time!
+plot(dat)
+```
+
+The plot function also takes in additional _arguments_, like `main`, `ylab` and `xlab`.
+
+```{r}
+# main = title
+# ylab = text on y-axis
+# xlab = text on x-asis
+plot(dat, main = "Proliferation", ylab = "DAPI Positive cells", xlab = "")
+```
+
+::: {.callout-tip collapse=true title="Function arguments"}
+
+All functions in R comes with documentation, where the function and all the arguments the function takes in are described. To open the documentation use the question mark `?` before the name of the function, like `?plot` will show:
+
+```
+plot                   package:base                    R Documentation
+
+Generic X-Y Plotting
+
+Description:
+
+     Generic function for plotting of R objects.
+
+     For simple scatter plots, ‘plot.default’ will be used.  However,
+     there are ‘plot’ methods for many R objects, including
+     ‘function’s, ‘data.frame’s, ‘density’ objects, etc.  Use
+     ‘methods(plot)’ and the documentation for these. Most of these
+     methods are implemented using traditional graphics (the ‘graphics’
+     package), but this is not mandatory.
+```
+
+To exit the documentation, press `q`.
+
+:::
+
+### Statistics
+
+Lets compare the group means of the different doses to see if there is any significant differences! An Analysis of Variance (ANOVA) analysis will tells us if there is a difference between the tested groups, but not between which. For this we run a _post-hoc_ (lat. after this) test. Since our tested groups are of **unequal** size we apply the Tukey-Kramer test. The group distribution can be seen with the [`table()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table) function which builts a [contingency table](https://en.wikipedia.org/wiki/Contingency_table).
+
+```{r}
+# Check group sizes
+table(dat$variable)
+```
+
+
+
+, run ANOVA w/ Tukey Kramer posthoc test.
+
+An ANOVA will tell us if there is a difference between the tested groups, but not between which. A posthoc 
+
+tests all pairwise comparison and 
+
+
+
+You want all pairwise comparisons while controlling family-wise error rate (FWER).
+
+Why Tukey vs Tukey–Kramer
+Use Tukey’s HSD when:
+
+You want all pairwise mean comparisons
+
+Group sizes are equal (or nearly equal)
+
+Use Tukey–Kramer when:
+
+You want all pairwise mean comparisons
+
+Group sizes are unequal (unbalanced design)
+
+Tukey–Kramer is essentially Tukey’s method generalized to unequal n’s, keeping FWER controlled across all pairs.
+
+```{r}
+
+```
+
+
+```{r}
+control <- subset(a, variable == "Control")$value
+dose250um <- subset(a, variable == "250 uM")$value
+
+t.test(control, dose250um)
+
+library(ggplot2)
+library(ggsignif)
+
+ggplot(dat, aes(x = variable, y = value, fill = variable)) +
+  #geom_boxplot() +
+  geom_bar(fun = "mean", stat = "summary", color = "black") +
+  geom_signif(
+    test = "t.test",
+    comparisons = list(
+      c("Control", "250 uM"),
+      c("Control", "500 uM"),
+      c("Control", "1 mM")),
+    map_signif_level = TRUE,
+    step_increase = 0.1) +
+  #scale_y_log10() +
+  theme_classic(base_size = 20) +
+  #scale_fill_grey() +
+  labs(
+    title = "Proliferation",
+    x = "",
+    y = "DAPI Positive cells")
+```
+
+::: {.callout-note collapse=true}
+
+## Resources
+
++ [ANOVA and Tukey Kramer posthoc test](https://scibrief.blog/tukey-kramer-r)
+
+:::

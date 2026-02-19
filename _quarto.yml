@@ -19,7 +19,6 @@ website:
     right:
       - icon: github
         href: https://github.com/karlssonlaboratory/mi8016-Research-Approaches
-        text: GitHub
       - icon: link
         href: https://karlssonlab.se/
         text: Karlssonlab
