@@ -21,7 +21,7 @@ Import the dataset, will be contained inside a "data frame", and inspect it with
 
 ```{r}
 # Import dataset
-dat <- read.csv("data/proliferation.csv")
+dat <- read.csv("../data/proliferation.csv")
 
 # head shows the top 6 rows of a data frame
 head(dat)
