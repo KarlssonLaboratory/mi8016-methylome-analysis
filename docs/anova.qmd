@@ -1,17 +1,22 @@
 ---
 title: "Analysis of Variance - ANOVA"
 subtitle: "Comparison of multiple group means"
+
+code-annotations: hover
 ---
 
 In the [PFOS paper from 2018](https://doi.org/10.1007/s00204-017-2077-8), PFOS in different doses and exposure times was applied and correlated with phenotypes such as proliferation, invation and migration. Here, we will reproduce the statistics and the figures for [figure 1F](https://link.springer.com/article/10.1007/s00204-017-2077-8/figures/1) and [figure 3](https://link.springer.com/article/10.1007/s00204-017-2077-8/figures/3). 
 
 ```{r}
-# Once per machine
-#install.packages("forcats")
+# Once per machine 						# <1>
+#install.packages("forcats") 	# <1>
 
-# Every R session
-library(forcats)
+# Every R session 						# <2>
+library(forcats) 							# <2>
 ```
+
+1. install
+2. load library
 
 ## Proliferation
 
@@ -94,7 +99,7 @@ library(ggplot2)
 
 ggplot(dat, aes(x = variable, y = value, fill = variable)) +
   geom_bar(fun = "mean", stat = "summary", color = "black") +
-  theme_classic(base_size = 20) +
+  theme_classic(base_size = 18) +
   labs(
     title = "Proliferation",
     x = "",
@@ -106,7 +111,7 @@ The legend is not needed, remove it with `theme(legend.position = "none")`:
 ```{r}
 ggplot(dat, aes(x = variable, y = value, fill = variable)) +
   geom_bar(fun = "mean", stat = "summary", color = "black") +
-  theme_classic(base_size = 20) +
+  theme_classic(base_size = 18) +
   
   theme(legend.position = "none") + # default: legend.position = "right"
   
@@ -128,7 +133,7 @@ ggplot(dat, aes(x = variable, y = value, fill = variable)) +
     fun.max = function(x) mean(x) + sd(x), 	# top whisker
     width = 0.4) + 													# width of whiskars
   
-  theme_classic(base_size = 20) +
+  theme_classic(base_size = 18) +
   theme(legend.position = "none") +
   labs(
     title = "Proliferation",

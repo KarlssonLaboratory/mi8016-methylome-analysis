@@ -19,10 +19,14 @@ website:
     right:
       - icon: github
         href: https://github.com/karlssonlaboratory/mi8016-Research-Approaches
-      - icon: link
+      - icon: house-door
         href: https://karlssonlab.se/
         text: Karlssonlab
 
 format:
   html:
     theme: pulse
+
+execute:
+  warning: false
+  message: false
