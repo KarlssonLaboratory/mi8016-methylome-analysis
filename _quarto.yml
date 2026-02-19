@@ -25,7 +25,7 @@ website:
 
 format:
   html:
-    code-annotations: select
+    code-annotations: below
     theme: pulse
 
 execute:
