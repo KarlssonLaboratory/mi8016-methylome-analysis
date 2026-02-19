@@ -95,14 +95,19 @@ Lets style the plot with `ggplot2`! Run the code below:
 # Every R sessoin
 library(ggplot2)
 
-ggplot(dat, aes(x = variable, y = value, fill = variable)) +
-  geom_bar(fun = "mean", stat = "summary", color = "black") +
-  theme_classic(base_size = 18) +
-  labs(
+ggplot(dat, aes(x = variable, y = value, fill = variable)) + 	# <1>
+  geom_bar(fun = "mean", stat = "summary", color = "black") + # <2>
+  theme_classic(base_size = 18) + 														# <3>
+  labs( 																											# <4>
     title = "Proliferation",
     x = "",
     y = "DAPI Positive cells")
 ```
+
+1. By adding a plus sign `+` multiple rows are chained fo the plot
+2. `geom_bar()` uses the mean to calculate the top part of the bar
+3. `theme_classic()` is on of many themes for decorating a plot. `base_size` sets the overall size.
+4. `labs()` holds arguments for text inputs for title, x-axis, y-axis, etc
 
 The legend is not needed, remove it with `theme(legend.position = "none")`:
 
@@ -124,13 +129,11 @@ We need to add "whiskers" to the plot, which shows mean +/- standard deviation, 
 ```{r}
 ggplot(dat, aes(x = variable, y = value, fill = variable)) +
   geom_bar(fun = "mean", stat = "summary", color = "black") +
-  
   geom_errorbar(
-  	stat = "summary",												# calculated on each group
-    fun.min = function(x) mean(x) - sd(x),	# bottom whisker
-    fun.max = function(x) mean(x) + sd(x), 	# top whisker
-    width = 0.4) + 													# width of whiskars
-  
+  	stat = "summary",
+    fun.min = function(x) mean(x) - sd(x),  # <1>
+    fun.max = function(x) mean(x) + sd(x),  # <2>
+    width = 0.4) +                          # <3> 
   theme_classic(base_size = 18) +
   theme(legend.position = "none") +
   labs(
@@ -138,6 +141,10 @@ ggplot(dat, aes(x = variable, y = value, fill = variable)) +
     x = "",
     y = "DAPI Positive cells")
 ```
+
+1. Bottom whisker
+2. Top whisker
+3. Width of whiskars
 
 Tilt the x-axis text 45 degress. `theme` holds all arguments for the plots general appearence:
 
