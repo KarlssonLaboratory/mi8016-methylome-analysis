@@ -27,7 +27,7 @@ format:
   html:
     code-annotations: below
     theme: pulse
-    highlight-style: tango
+    highlight-style: arrow-dark
 
 execute:
   warning: false

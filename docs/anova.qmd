@@ -29,7 +29,10 @@ Import the dataset, will be contained inside a "data frame", and inspect it with
 
 ```{r}
 # Import dataset
-dat <- read.csv("../data/proliferation.csv")
+dat <- read.csv("../data/proliferation.csv") 				# <1>
+
+#rows <- !is.na(dat$value)
+#dat <- dat[rows,]
 
 # head shows the top 6 rows of a data frame
 head(dat)
@@ -38,8 +41,13 @@ head(dat)
 summary(dat)
 ```
 
+1. This path is relative to where you start your R session. If you start inside `docs/` use `"../data/proliferation.csv"`, if you start inside the project folder use `"data/proliferation.csv"`.
+
 ::: {.callout-tip collapse=true title="What can you read about the dataset?"}
-The data frame is composed of 2 columns and 52 rows.
+The data frame is composed:
+
++ 2 columns : variables and value
++ 52 rows 	: all numeric with 2 NAs 
 :::
 
 Lets make a simple plot! 
@@ -48,12 +56,13 @@ The `plot()` function can read a data frame and recognice that the variable colu
 
 ```{r}
 # Make variable column into factor (categorical)
-# forcats::fct_inorder makes the categorices of the column the order they appear
-dat$variable <- fct_inorder(dat$variable)
+dat$variable <- fct_inorder(dat$variable)         # <1>
 
 # Plot time!
 plot(dat)
 ```
+
+1. `forcats::fct_inorder` makes the categorices of the column the order they appear.
 
 The plot function also takes in additional _arguments_, like `main`, `ylab` and `xlab`.
 
@@ -177,11 +186,11 @@ ggplot(dat, aes(x = variable, y = value, fill = variable)) +
     y = "DAPI Positive cells")
 ```
 
-1. hjust = right-justifed
+1. `hjust = 1` aligns the text to right-justifed.
 
 ## Exercise
 
-The colors of the actual figure does not match our colors. Can you match the colors?
+The colors of the actual figure does not match our colors. Can you match the colors? Here is the original [figure 1F](https://link.springer.com/article/10.1007/s00204-017-2077-8/figures/1).
 
 ::: {.callout-tip collapse=true title="Hint 1"}
 
@@ -203,50 +212,76 @@ Check the internet! [stackoverflow.com](https://stackoverflow.com/search?q=scale
 
 ## Statistics
 
-Lets compare the group means of the different doses to see if there is any significant differences! An Analysis of Variance (ANOVA) analysis will tells us if there is a difference between the tested groups, but not between which. For this we run a _post-hoc_ (lat. after this) test. Since our tested groups are of **unequal** size we apply the Tukey-Kramer test. The group distribution can be seen with the [`table()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table) function which builts a [contingency table](https://en.wikipedia.org/wiki/Contingency_table).
+Lets compare the group means of the different doses to see if there is any significant differences! An Analysis of Variance (ANOVA) analysis will tells us if there is a difference between the tested groups, but not between which. For this we run a _post-hoc_ (lat. after this) test. The Tukey-Kramer test is post-hoc test that will tell us between which groups there is a difference.
+
+The `aov()` function runs an ANOVA analysis. The formula argument reads `y ~ x`, hence we use `value ~ variabale`. The `summary()` function will show us the overall result of the ANOVA:
 
 ```{r}
-# Check group sizes
-table(dat$variable)
+model <- aov(formula = value ~ variable, data = dat)
+
+summary(model)
 ```
 
-
-
-, run ANOVA w/ Tukey Kramer posthoc test.
-
-An ANOVA will tell us if there is a difference between the tested groups, but not between which. A posthoc 
-
-tests all pairwise comparison and 
-
-
-
-You want all pairwise comparisons while controlling family-wise error rate (FWER).
-
-Why Tukey vs Tukey–Kramer
-Use Tukey’s HSD when:
-
-You want all pairwise mean comparisons
-
-Group sizes are equal (or nearly equal)
-
-Use Tukey–Kramer when:
-
-You want all pairwise mean comparisons
-
-Group sizes are unequal (unbalanced design)
-
-Tukey–Kramer is essentially Tukey’s method generalized to unequal n’s, keeping FWER controlled across all pairs.
+The `Pr(>F)` column holds the _p_-values. Here we can see that the model is significant. Lets found out between which groups. For this, run `TukeyHSD()` (Tukey Honest Significant Differences) test, with the model as argument. Print the results after:
 
 ```{r}
+results <- TukeyHSD(model)
 
+results
 ```
 
+We see all the comparisons now. We are only interested in the comparisons with `Control`. Instead of doing this manually lets extract those comparisons computationally. 
 
+`results` is an object. We want the data frame with comparisons only. This is found in `results$variable`:
+
+```{r}
+results$variable
+```
+
+The comparisons are not in a column but in the row names:
+
+```{r}
+rownames(results$variable)
+```
+
+`grep()` is a function that will match a string, lets use `"Control"` as the string. This will return which rows are matches:
+
+```{r}
+rows <- grep("Control", rownames(results$variable))
+rows
+```
+
+Now lets only select those rows:
+
+```{r}
+data <- results$variable[rows, ]
+```
+
+Make the object into a `data.frame()`
+
+```{r}
+data <- data.frame(data)
+```
+
+Check the results!
+
+```{r}
+data
+```
+
+Lastly, lets only focus only on the significant ones. `subset()` filters columns based on criterias:
+
+```{r}
+subset(data, p.adj < 0.05)
+```
+
+Does our results match figure 1F of the paper??
 
 ::: {.callout-note collapse=true}
 
 ## Resources
 
++ [The Tukey test](https://r-graph-gallery.com/84-tukey-test.html)
 + [ANOVA and Tukey Kramer posthoc test](https://scibrief.blog/tukey-kramer-r)
 
 :::
