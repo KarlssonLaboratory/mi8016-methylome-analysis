@@ -275,7 +275,7 @@ Lastly, lets only focus only on the significant ones. `subset()` filters columns
 subset(data, p.adj < 0.05)
 ```
 
-Does our results match figure 1F of the paper??
+Does our results match [figure 1F](https://link.springer.com/article/10.1007/s00204-017-2077-8/figures/1) of the paper??
 
 ::: {.callout-note collapse=true}
 
